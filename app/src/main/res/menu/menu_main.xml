@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="dev.abgeo.todo.MainActivity">
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter_list"
+        android:title="@string/action_filter"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_clear_completed"
+        android:title="@string/action_clear_completed" />
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh" />
+</menu>

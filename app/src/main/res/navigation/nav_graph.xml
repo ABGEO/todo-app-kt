@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navTasksFragment">
+    <fragment
+        android:id="@+id/navTasksFragment"
+        android:name="dev.abgeo.todo.TasksFragment"
+        android:label="fragment_tasks"
+        tools:layout="@layout/fragment_tasks" >
+        <action
+            android:id="@+id/action_navTasksFragment_to_navTaskFormFragment"
+            app:destination="@id/navTaskFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navTaskFormFragment"
+        android:name="dev.abgeo.todo.TaskFormFragment"
+        android:label="fragment_task_form"
+        tools:layout="@layout/fragment_task_form" >
+        <action
+            android:id="@+id/action_navTaskFormFragment_to_navTasksFragment"
+            app:destination="@id/navTasksFragment" />
+    </fragment>
+</navigation>
