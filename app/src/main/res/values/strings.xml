@@ -17,4 +17,5 @@
     <string name="mark_as_completed">Task marked as completed</string>
     <string name="mark_as_active">Task marked as active</string>
     <string name="title_is_required">Title is required</string>
+    <string name="completed_task_cleared">Completed Tasks has been cleared</string>
 </resources>

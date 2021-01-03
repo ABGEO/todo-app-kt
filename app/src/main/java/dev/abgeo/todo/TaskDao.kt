@@ -14,6 +14,9 @@ interface TaskDao {
     @Delete
     fun delete(task: Task)
 
+    @Query("DELETE FROM task WHERE is_completed = 1")
+    fun deleteCompleted()
+
     @Update
     fun updateTask(task: Task)
 

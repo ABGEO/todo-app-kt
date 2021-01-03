@@ -78,7 +78,15 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
                 true
             }
             R.id.action_clear_completed -> {
-                // TODO
+                context?.let {
+                    TaskRepository.deleteCompleted(it)
+                    taskViewModel.getTasks(it)
+                    Snackbar.make(
+                        fragmentView,
+                        getText(R.string.completed_task_cleared),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
                 true
             }
             R.id.action_refresh -> {
