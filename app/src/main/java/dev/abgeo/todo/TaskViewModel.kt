@@ -19,8 +19,12 @@ class TaskViewModel : ViewModel() {
         _taskLiveData.postValue(task)
     }
 
+    fun postTasks(tasks: List<Task>?) {
+        _tasksLiveData.postValue(tasks)
+    }
+
     fun getTasks(context: Context) {
-        _tasksLiveData.postValue(TaskRepository.getTasks(context))
+        postTasks(TaskRepository.getTasks(context))
     }
 
 }

@@ -1,12 +1,12 @@
 package dev.abgeo.todo
 
+import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +21,15 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
     private lateinit var ivEmptyBG : ImageView
     private lateinit var tvEmptyBG : TextView
 
+    private var tasksAlreadyLoaded : Boolean = false
+    private var tasks : List<Task> = emptyList()
+
     private val taskViewModel: TaskViewModel by navGraphViewModels(R.id.nav_graph)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +47,12 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
                 setListIsEmpty()
             } else {
                 setListIsEmpty(false)
+
+                if (!tasksAlreadyLoaded) {
+                    tasksAlreadyLoaded = true
+                    tasks = it
+                }
+
                 rvTasks.adapter = TaskRecyclerViewAdapter(it, this@TasksFragment)
             }
         })
@@ -49,6 +63,66 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
         }
 
         return fragmentView
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.action_filter -> {
+                context?.let { showFilteringPopUpMenu(it) }
+                true
+            }
+            R.id.action_clear_completed -> {
+                // TODO
+                true
+            }
+            R.id.action_refresh -> {
+                context?.let { taskViewModel.getTasks(it) }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    private fun showFilteringPopUpMenu(context: Context) {
+        val view = activity?.findViewById<View>(R.id.action_filter) ?: return
+
+        PopupMenu(context, view).run {
+            menuInflater.inflate(R.menu.menu_filter, menu)
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.action_all -> {
+                        filterTasks(FILTER_ALL)
+                        true
+                    }
+                    R.id.action_active -> {
+                        filterTasks(FILTER_ACTIVE)
+                        true
+                    }
+                    R.id.action_completed -> {
+                        filterTasks(FILTER_COMPLETED)
+                        true
+                    }
+                    else -> false
+                }
+            }
+            show()
+        }
+    }
+
+    private fun filterTasks(criteria: Int) {
+        val filteredTasks = when(criteria) {
+            FILTER_ACTIVE -> tasks.filter { !it.isCompleted }
+            FILTER_COMPLETED -> tasks.filter { it.isCompleted }
+            else -> tasks
+        }
+
+        taskViewModel.postTasks(filteredTasks)
     }
 
     override fun onTaskCheckedListener(task: Task, isChecked: Boolean) {
@@ -67,6 +141,12 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
         tvAllTasks.visibility = if (isEmpty) View.GONE else View.VISIBLE
         ivEmptyBG.visibility = if (isEmpty) View.VISIBLE else View.GONE
         tvEmptyBG.visibility = if (isEmpty) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        private const val FILTER_ALL = 0
+        private const val FILTER_ACTIVE = 1
+        private const val FILTER_COMPLETED = 2
     }
 
 }
