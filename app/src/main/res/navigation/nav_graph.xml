@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_navTasksFragment_to_navTaskFormFragment"
             app:destination="@id/navTaskFormFragment" />
+        <action
+            android:id="@+id/action_navTasksFragment_to_navTaskDetailsFragment"
+            app:destination="@id/navTaskDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/navTaskFormFragment"
@@ -21,5 +24,17 @@
         <action
             android:id="@+id/action_navTaskFormFragment_to_navTasksFragment"
             app:destination="@id/navTasksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navTaskDetailsFragment"
+        android:name="dev.abgeo.todo.TaskDetailsFragment"
+        android:label="fragment_task_details"
+        tools:layout="@layout/fragment_task_details" >
+        <action
+            android:id="@+id/action_navTaskDetailsFragment_to_navTasksFragment"
+            app:destination="@id/navTasksFragment" />
+        <action
+            android:id="@+id/action_navTaskDetailsFragment_to_navTaskFormFragment"
+            app:destination="@id/navTaskFormFragment" />
     </fragment>
 </navigation>

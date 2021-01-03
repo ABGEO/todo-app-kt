@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
             title = when (destination.id) {
                 R.id.navTaskFormFragment -> getText(R.string.new_task)
+                R.id.navTaskDetailsFragment -> getText(R.string.task_details)
                 else -> getText(R.string.app_name)
             }
         }

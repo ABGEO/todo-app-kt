@@ -5,18 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class TaskFormFragment : Fragment() {
+class TaskDetailsFragment : Fragment() {
 
-    private lateinit var etTaskTitle : EditText
-    private lateinit var etTaskBody : EditText
+    private lateinit var cbTaskTitle : CheckBox
+    private lateinit var tvTaskBody : TextView
 
     private var task : Task? = null
 
@@ -26,23 +27,23 @@ class TaskFormFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_task_form, container, false)
+        val view = inflater.inflate(R.layout.fragment_task_details, container, false)
 
-        etTaskTitle = view.findViewById(R.id.etTaskTitle)
-        etTaskBody = view.findViewById(R.id.etTaskBody)
+        cbTaskTitle = view.findViewById(R.id.cbTaskTitle)
+        tvTaskBody = view.findViewById(R.id.tvTaskBody)
 
         taskViewModel.taskLiveData.observe(viewLifecycleOwner, {
-            (activity as AppCompatActivity).title = getString(R.string.edit_task)
-
             with(it) {
                 task = this
-                etTaskTitle.setText(title)
-                etTaskBody.setText(body)
+                cbTaskTitle.text = title
+                cbTaskTitle.isChecked = isCompleted
+                tvTaskBody.text = body
             }
         })
 
-        view.findViewById<FloatingActionButton>(R.id.fabSaveTask).setOnClickListener {
-            Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show()
+        view.findViewById<FloatingActionButton>(R.id.fabEditTask).setOnClickListener {
+            task?.let { t -> taskViewModel.postTask(t) }
+            it.findNavController().navigate(R.id.action_navTaskDetailsFragment_to_navTaskFormFragment)
         }
 
         return view

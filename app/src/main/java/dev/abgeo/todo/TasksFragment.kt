@@ -12,8 +12,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TasksFragment : Fragment() {
 
-    private val taskViewModel: TaskViewModel by navGraphViewModels(R.id.nav_graph)
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

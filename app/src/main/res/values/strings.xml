@@ -9,6 +9,7 @@
     <string name="no_tasks_message">You have no tasks!</string>
     <string name="new_task">New Task</string>
     <string name="edit_task">Edit Task</string>
+    <string name="task_details">Task Details</string>
     <string name="title">Title</string>
     <string name="task_body_hint">Enter your task here.</string>
 </resources>
