@@ -3,7 +3,7 @@ package dev.abgeo.todo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.util.ArrayList
+import android.content.Context
 
 class TaskViewModel : ViewModel() {
 
@@ -19,14 +19,8 @@ class TaskViewModel : ViewModel() {
         _taskLiveData.postValue(task)
     }
 
-    fun getTasks() {
-        // TODO
-        val tasks: MutableList<Task> = ArrayList()
-        for (i in 1..10) {
-            tasks.add((Task("Task $i", "Task $i", i % 2 == 0)))
-        }
-
-        _tasksLiveData.postValue(tasks)
+    fun getTasks(context: Context) {
+        _tasksLiveData.postValue(TaskRepository.getTasks(context))
     }
 
 }

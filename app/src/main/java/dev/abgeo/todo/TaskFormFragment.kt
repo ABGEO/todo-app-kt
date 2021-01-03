@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class TaskFormFragment : Fragment() {
 
@@ -42,7 +41,19 @@ class TaskFormFragment : Fragment() {
         })
 
         view.findViewById<FloatingActionButton>(R.id.fabSaveTask).setOnClickListener {
-            Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show()
+            if (etTaskTitle.text.isEmpty() || etTaskTitle.text.isBlank()) {
+                etTaskTitle.error = getText(R.string.title_is_required)
+
+                return@setOnClickListener
+            }
+
+            if (task == null) {
+                val task = Task(0, etTaskTitle.text.toString(), etTaskBody.text.toString())
+                context?.let { c -> TaskRepository.insertTask(c, task) }
+            }
+
+            findNavController().navigate(R.id.action_navTaskFormFragment_to_navTasksFragment)
+            Snackbar.make(it, getText(R.string.task_added), Snackbar.LENGTH_SHORT).show()
         }
 
         return view

@@ -42,7 +42,7 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
                 rvTasks.adapter = TaskRecyclerViewAdapter(it, this@TasksFragment)
             }
         })
-        taskViewModel.getTasks()
+        context?.let { taskViewModel.getTasks(it) }
 
         fragmentView.findViewById<FloatingActionButton>(R.id.fabAddTask).setOnClickListener {
             it.findNavController().navigate(R.id.action_navTasksFragment_to_navTaskFormFragment)
@@ -52,6 +52,9 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
     }
 
     override fun onTaskCheckedListener(task: Task, isChecked: Boolean) {
+        task.isCompleted = isChecked
+        context?.let { TaskRepository.updateTask(it, task) }
+
         Snackbar.make(
             fragmentView,
             getText(if (isChecked) R.string.mark_as_completed else R.string.mark_as_active),
