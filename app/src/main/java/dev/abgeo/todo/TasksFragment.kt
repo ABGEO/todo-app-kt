@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
-class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
+class TasksFragment : Fragment(),
+    TaskRecyclerViewAdapter.TaskCheckedListener,
+    TaskRecyclerViewAdapter.TaskClickListener
+{
 
     private lateinit var fragmentView : View
     private lateinit var rvTasks : RecyclerView
@@ -53,7 +56,11 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
                     tasks = it
                 }
 
-                rvTasks.adapter = TaskRecyclerViewAdapter(it, this@TasksFragment)
+                rvTasks.adapter = TaskRecyclerViewAdapter(
+                    it,
+                    this@TasksFragment,
+                    this@TasksFragment
+                )
             }
         })
         context?.let { taskViewModel.getTasks(it) }
@@ -142,6 +149,11 @@ class TasksFragment : Fragment(), TaskRecyclerViewAdapter.TaskCheckedListener {
             getText(if (isChecked) R.string.mark_as_completed else R.string.mark_as_active),
             Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    override fun onTaskClickListener(task: Task) {
+        taskViewModel.postTask(task)
+        fragmentView.findNavController().navigate(R.id.action_navTasksFragment_to_navTaskDetailsFragment)
     }
 
     private fun setListIsEmpty(isEmpty: Boolean = true) {

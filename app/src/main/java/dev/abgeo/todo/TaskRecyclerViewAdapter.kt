@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
+import android.widget.TextView
 
 class TaskRecyclerViewAdapter(
     private val tasks: List<Task>,
-    private val taskCheckedListener: TaskCheckedListener
+    private val taskCheckedListener: TaskCheckedListener,
+    private val taskClickListener: TaskClickListener
 ) : RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,21 +24,25 @@ class TaskRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val task = tasks[position]
-        holder.cbTaskTitle.text = task.title
+        holder.tvTaskTitle.text = task.title
 
         if (task.isCompleted) {
             holder.cbTaskTitle.isChecked = true
-            holder.cbTaskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            holder.tvTaskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         holder.cbTaskTitle.setOnCheckedChangeListener { _: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
-                holder.cbTaskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                holder.tvTaskTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             } else {
-                holder.cbTaskTitle.paintFlags = Paint.ANTI_ALIAS_FLAG
+                holder.tvTaskTitle.paintFlags = Paint.ANTI_ALIAS_FLAG
             }
 
             taskCheckedListener.onTaskCheckedListener(task, isChecked)
+        }
+
+        holder.tvTaskTitle.setOnClickListener {
+            taskClickListener.onTaskClickListener(task)
         }
     }
 
@@ -44,10 +50,15 @@ class TaskRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val cbTaskTitle: CheckBox = view.findViewById(R.id.cbTaskTitle)
+        val tvTaskTitle: TextView = view.findViewById(R.id.tvTaskTitle)
     }
 
     interface TaskCheckedListener {
         fun onTaskCheckedListener(task: Task, isChecked: Boolean)
+    }
+
+    interface TaskClickListener {
+        fun onTaskClickListener(task: Task)
     }
 
 }
