@@ -47,13 +47,20 @@ class TaskFormFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            val messageId: Int
             if (task == null) {
-                val task = Task(0, etTaskTitle.text.toString(), etTaskBody.text.toString())
-                context?.let { c -> TaskRepository.insertTask(c, task) }
+                task = Task(etTaskTitle.text.toString(), etTaskBody.text.toString())
+                context?.let { c -> TaskRepository.insertTask(c, task!!) }
+                messageId = R.string.task_added
+            } else {
+                task!!.title = etTaskTitle.text.toString()
+                task!!.body = etTaskBody.text.toString()
+                context?.let { c -> TaskRepository.updateTask(c, task!!) }
+                messageId = R.string.task_edited
             }
 
             findNavController().navigate(R.id.action_navTaskFormFragment_to_navTasksFragment)
-            Snackbar.make(it, getText(R.string.task_added), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(it, getText(messageId), Snackbar.LENGTH_SHORT).show()
         }
 
         return view
