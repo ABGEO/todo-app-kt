@@ -31,12 +31,16 @@ class TaskFormFragment : Fragment() {
         etTaskBody = view.findViewById(R.id.etTaskBody)
 
         taskViewModel.taskLiveData.observe(viewLifecycleOwner, {
-            (activity as AppCompatActivity).title = getString(R.string.edit_task)
-
             with(it) {
                 task = this
-                etTaskTitle.setText(title)
-                etTaskBody.setText(body)
+                if (task == null) {
+                    etTaskTitle.text = null
+                    etTaskBody.text = null
+                } else {
+                    (activity as AppCompatActivity).title = getString(R.string.edit_task)
+                    etTaskTitle.setText(title)
+                    etTaskBody.setText(body)
+                }
             }
         })
 

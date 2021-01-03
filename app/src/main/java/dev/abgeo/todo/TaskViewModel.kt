@@ -15,7 +15,7 @@ class TaskViewModel : ViewModel() {
     val taskLiveData: LiveData<Task>
         get() = _taskLiveData
 
-    fun postTask(task: Task) {
+    fun postTask(task: Task?) {
         _taskLiveData.postValue(task)
     }
 

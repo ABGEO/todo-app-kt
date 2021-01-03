@@ -66,6 +66,7 @@ class TasksFragment : Fragment(),
         context?.let { taskViewModel.getTasks(it) }
 
         fragmentView.findViewById<FloatingActionButton>(R.id.fabAddTask).setOnClickListener {
+            taskViewModel.postTask(null)
             it.findNavController().navigate(R.id.action_navTasksFragment_to_navTaskFormFragment)
         }
 
