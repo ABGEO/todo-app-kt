@@ -8,7 +8,7 @@
         android:id="@+id/navTasksFragment"
         android:name="dev.abgeo.todo.TasksFragment"
         android:label="fragment_tasks"
-        tools:layout="@layout/fragment_tasks" >
+        tools:layout="@layout/fragment_task_list" >
         <action
             android:id="@+id/action_navTasksFragment_to_navTaskFormFragment"
             app:destination="@id/navTaskFormFragment" />

@@ -1,14 +1,11 @@
 package dev.abgeo.todo
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {

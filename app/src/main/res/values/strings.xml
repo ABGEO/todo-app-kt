@@ -10,6 +10,9 @@
     <string name="new_task">New Task</string>
     <string name="edit_task">Edit Task</string>
     <string name="task_details">Task Details</string>
+    <string name="all_tasks">All Tasks</string>
     <string name="title">Title</string>
     <string name="task_body_hint">Enter your task here.</string>
+    <string name="mark_as_completed">Task marked as completed</string>
+    <string name="mark_as_active">Task marked as active</string>
 </resources>
