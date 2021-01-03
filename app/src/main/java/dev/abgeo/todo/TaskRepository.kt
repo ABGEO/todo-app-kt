@@ -31,6 +31,11 @@ class TaskRepository {
             database!!.getTaskDao().deleteCompleted()
         }
 
+        fun delete(context: Context, task: Task) {
+            database = TaskDatabase.getDatabaseClient(context)
+            database!!.getTaskDao().delete(task)
+        }
+
         fun getTasks(context: Context) : List<Task>? {
             database = TaskDatabase.getDatabaseClient(context)
 

@@ -6,6 +6,7 @@
     <string name="action_clear_completed">Clear completed</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_filter">Filter</string>
+    <string name="action_delete">Delete</string>
     <string name="no_tasks_message">You have no tasks!</string>
     <string name="new_task">New Task</string>
     <string name="edit_task">Edit Task</string>
@@ -19,4 +20,5 @@
     <string name="title_is_required">Title is required</string>
     <string name="completed_task_cleared">Completed Tasks has been cleared</string>
     <string name="task_edited">Task has been edited</string>
+    <string name="task_deleted">Task hes been deleted</string>
 </resources>

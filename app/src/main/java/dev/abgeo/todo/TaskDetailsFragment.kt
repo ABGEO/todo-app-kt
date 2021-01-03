@@ -1,12 +1,11 @@
 package dev.abgeo.todo
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +18,11 @@ class TaskDetailsFragment : Fragment() {
     private var task : Task? = null
 
     private val taskViewModel: TaskViewModel by navGraphViewModels(R.id.nav_graph)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,5 +64,30 @@ class TaskDetailsFragment : Fragment() {
 
         return view
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_task, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+            when (item.itemId) {
+                R.id.action_delete -> {
+                    context?.let {
+                        task?.let { t -> TaskRepository.delete(it, t) }
+                        taskViewModel.getTasks(it)
+                        activity?.run {
+                            Snackbar.make(
+                                    this.findViewById(R.id.content),
+                                    getText(R.string.task_deleted),
+                                    Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                        findNavController().navigate(R.id.navTasksFragment)
+                    }
+                    true
+                }
+                else -> super.onOptionsItemSelected(item)
+            }
 
 }
