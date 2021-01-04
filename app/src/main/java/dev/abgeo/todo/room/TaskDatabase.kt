@@ -1,9 +1,11 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import dev.abgeo.todo.dao.TaskDao
+import dev.abgeo.todo.entity.Task
 
 @Database(entities = [Task::class], version = 1)
 abstract class TaskDatabase : RoomDatabase() {

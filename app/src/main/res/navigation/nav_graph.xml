@@ -6,7 +6,7 @@
     app:startDestination="@id/navTasksFragment">
     <fragment
         android:id="@+id/navTasksFragment"
-        android:name="dev.abgeo.todo.TasksFragment"
+        android:name="dev.abgeo.todo.fragment.TasksFragment"
         android:label="fragment_tasks"
         tools:layout="@layout/fragment_task_list" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/navTaskFormFragment"
-        android:name="dev.abgeo.todo.TaskFormFragment"
+        android:name="dev.abgeo.todo.fragment.TaskFormFragment"
         android:label="fragment_task_form"
         tools:layout="@layout/fragment_task_form" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/navTaskDetailsFragment"
-        android:name="dev.abgeo.todo.TaskDetailsFragment"
+        android:name="dev.abgeo.todo.fragment.TaskDetailsFragment"
         android:label="fragment_task_details"
         tools:layout="@layout/fragment_task_details" >
         <action

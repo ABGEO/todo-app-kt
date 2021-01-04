@@ -1,4 +1,4 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.fragment
 
 import android.os.Bundle
 import android.view.*
@@ -9,6 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import dev.abgeo.todo.R
+import dev.abgeo.todo.repository.TaskRepository
+import dev.abgeo.todo.viewmodel.TaskViewModel
+import dev.abgeo.todo.entity.Task
 
 class TaskDetailsFragment : Fragment() {
 

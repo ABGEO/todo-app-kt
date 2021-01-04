@@ -1,4 +1,4 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -12,10 +12,15 @@ import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import dev.abgeo.todo.R
+import dev.abgeo.todo.adapter.TaskRecyclerViewAdapter
+import dev.abgeo.todo.repository.TaskRepository
+import dev.abgeo.todo.viewmodel.TaskViewModel
+import dev.abgeo.todo.entity.Task
 
 class TasksFragment : Fragment(),
-    TaskRecyclerViewAdapter.TaskCheckedListener,
-    TaskRecyclerViewAdapter.TaskClickListener
+        TaskRecyclerViewAdapter.TaskCheckedListener,
+        TaskRecyclerViewAdapter.TaskClickListener
 {
 
     private lateinit var fragmentView : View

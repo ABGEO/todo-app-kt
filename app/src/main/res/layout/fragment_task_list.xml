@@ -6,7 +6,7 @@
     android:name="dev.abgeo.todo.TasksFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TasksFragment">
+    tools:context=".fragment.TasksFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAllTasks"
-            tools:context=".TasksFragment"
+            tools:context=".fragment.TasksFragment"
             tools:listitem="@layout/fragment_task_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

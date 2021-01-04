@@ -1,6 +1,8 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.repository
 
 import android.content.Context
+import dev.abgeo.todo.entity.Task
+import dev.abgeo.todo.room.TaskDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

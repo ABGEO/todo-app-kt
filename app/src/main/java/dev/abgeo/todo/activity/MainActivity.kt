@@ -1,8 +1,9 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import dev.abgeo.todo.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.adapter
 
 import android.graphics.Paint
 import androidx.recyclerview.widget.RecyclerView
@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.TextView
+import dev.abgeo.todo.R
+import dev.abgeo.todo.entity.Task
 
 class TaskRecyclerViewAdapter(
-    private val tasks: List<Task>,
-    private val taskCheckedListener: TaskCheckedListener,
-    private val taskClickListener: TaskClickListener
+        private val tasks: List<Task>,
+        private val taskCheckedListener: TaskCheckedListener,
+        private val taskClickListener: TaskClickListener
 ) : RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

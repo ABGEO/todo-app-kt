@@ -1,9 +1,11 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.content.Context
+import dev.abgeo.todo.entity.Task
+import dev.abgeo.todo.repository.TaskRepository
 
 class TaskViewModel : ViewModel() {
 

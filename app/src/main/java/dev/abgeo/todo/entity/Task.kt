@@ -1,4 +1,4 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

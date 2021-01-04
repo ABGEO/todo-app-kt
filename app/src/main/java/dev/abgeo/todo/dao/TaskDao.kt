@@ -1,6 +1,7 @@
-package dev.abgeo.todo
+package dev.abgeo.todo.dao
 
 import androidx.room.*
+import dev.abgeo.todo.entity.Task
 
 @Dao
 interface TaskDao {
