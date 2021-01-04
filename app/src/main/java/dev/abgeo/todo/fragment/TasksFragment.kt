@@ -29,7 +29,7 @@ class TasksFragment : Fragment(),
     private lateinit var ivEmptyBG : ImageView
     private lateinit var tvEmptyBG : TextView
 
-    private var tasksAlreadyLoaded : Boolean = false
+    private var areTasksFiltered : Boolean = false
     private var tasks : List<Task> = emptyList()
 
     private val taskViewModel: TaskViewModel by navGraphViewModels(R.id.nav_graph)
@@ -56,11 +56,11 @@ class TasksFragment : Fragment(),
             } else {
                 setListIsEmpty(false)
 
-                if (!tasksAlreadyLoaded) {
-                    tasksAlreadyLoaded = true
+                if (!areTasksFiltered) {
                     tasks = it
                 }
 
+                areTasksFiltered = false
                 rvTasks.adapter = TaskRecyclerViewAdapter(
                     it,
                     this@TasksFragment,
@@ -142,6 +142,7 @@ class TasksFragment : Fragment(),
             else -> tasks
         }
 
+        areTasksFiltered = true
         taskViewModel.postTasks(filteredTasks)
     }
 
